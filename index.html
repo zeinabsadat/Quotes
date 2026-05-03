@@ -19,9 +19,10 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* کارت سفید بیرونی - ارتفاع 200 مثل ساعت و گالری */
+  /* کارت سفید بیرونی - عرض حالا 100% شده تا کل فضا رو پر کنه */
   .quote-card {
-    width: 460px;
+    width: 100%;
+    max-width: 100%;
     height: 200px;
     background: #ffffff;
     border-radius: 28px;
@@ -82,7 +83,7 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 22px; /* افزایش سایز پایه */
+    font-size: 22px;
     line-height: 1.3;
     color: #1a1a1a;
     margin: 0 0 8px 0;
@@ -100,7 +101,7 @@
 
   .quote-author {
     font-family: 'Inter', sans-serif;
-    font-size: 11.5px; /* افزایش سایز نام نویسنده */
+    font-size: 11.5px;
     font-weight: 500;
     color: #6b4a3a;
     letter-spacing: 0.8px;
@@ -142,7 +143,6 @@
     const slide = document.createElement('div');
     slide.className = 'quote-slide';
 
-    // تنظیم سایز فونت برای متن‌های کوتاه و بلند به صورت پله‌ای و بزرگتر
     let fontSize = 23;
     if (q.text.length > 70) fontSize = 20;
     if (q.text.length > 90) fontSize = 18;
