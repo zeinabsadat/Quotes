@@ -11,25 +11,24 @@
   html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
-  /* کارت سفید بیرونی */
+  /* کارت سفید بیرونی - کل iframe رو پر می‌کنه */
   .quote-card {
-    width: 600px;
-    height: 280px;
+    width: 100%;
+    height: 100%;
     background: #ffffff;
-    border-radius: 42px;
+    border-radius: 8vmin;
     box-shadow:
-      0 16px 48px rgba(0, 0, 0, 0.08),
-      0 4px 10px rgba(0, 0, 0, 0.04),
+      0 4vmin 12vmin rgba(0, 0, 0, 0.08),
+      0 1vmin 3vmin rgba(0, 0, 0, 0.04),
       inset 0 0 0 1px rgba(0, 0, 0, 0.03);
-    padding: 14px;
+    padding: 4vmin;
     box-sizing: border-box;
   }
 
@@ -38,20 +37,19 @@
     width: 100%;
     height: 100%;
     background: #d8c4be;
-    border-radius: 30px;
+    border-radius: 5.5vmin;
     position: relative;
     overflow: hidden;
   }
 
-  /* علامت کوتیشن تزئینی */
   .quote-mark {
     position: absolute;
-    top: -4px;
-    left: 28px;
+    top: -1vmin;
+    left: 5vmin;
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 600;
-    font-size: 100px;
+    font-size: 28vmin;
     line-height: 1;
     color: #8a5a2a;
     opacity: 0.28;
@@ -62,7 +60,7 @@
   .quote-slide {
     position: absolute;
     inset: 0;
-    padding: 34px 44px 28px;
+    padding: 8vmin 8vmin 6vmin;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -71,7 +69,7 @@
     text-align: center;
     opacity: 0;
     transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-    transform: translateY(10px);
+    transform: translateY(2vmin);
   }
 
   .quote-slide.active {
@@ -83,31 +81,29 @@
     font-family: 'Cormorant Garamond', serif;
     font-style: italic;
     font-weight: 500;
-    font-size: 26px;
-    line-height: 1.35;
+    line-height: 1.4;
     color: #1a1a1a;
-    margin: 0 0 16px 0;
+    margin: 0 0 4vmin 0;
     max-width: 100%;
   }
 
-  /* خط نازک جداکننده */
   .divider {
-    width: 36px;
-    height: 1.5px;
+    width: 8vmin;
+    height: 0.4vmin;
     background: #8a5a2a;
-    border-radius: 1px;
-    margin-bottom: 14px;
+    border-radius: 0.2vmin;
+    margin-bottom: 3vmin;
     opacity: 0.6;
   }
 
   .quote-author {
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
     font-weight: 500;
     color: #6b4a3a;
-    letter-spacing: 1px;
+    letter-spacing: 0.2vmin;
     text-transform: uppercase;
     margin: 0;
+    font-size: clamp(10px, 2.5vmin, 16px);
   }
 </style>
 </head>
@@ -133,9 +129,8 @@
     { text: "The best way to predict the future is to create it.", author: "Peter Drucker" }
   ];
 
-  const intervalMs = 15000; // ۱۵ ثانیه
+  const intervalMs = 15000;
 
-  // ترتیب رندوم
   quotes.sort(() => Math.random() - 0.5);
 
   const container = document.getElementById('container');
@@ -145,13 +140,13 @@
     const slide = document.createElement('div');
     slide.className = 'quote-slide';
 
-    // تنظیم سایز فونت بر اساس طول متن
-    let fontSize = 26;
-    if (q.text.length > 80) fontSize = 22;
-    if (q.text.length > 100) fontSize = 20;
+    // سایز فونت ریسپانسیو با clamp
+    let baseSize = '7vmin';
+    if (q.text.length > 80) baseSize = '5.8vmin';
+    if (q.text.length > 100) baseSize = '5vmin';
 
     slide.innerHTML = `
-      <p class="quote-text" style="font-size:${fontSize}px;">${q.text}</p>
+      <p class="quote-text" style="font-size: clamp(14px, ${baseSize}, 36px);">${q.text}</p>
       <div class="divider"></div>
       <p class="quote-author">${q.author}</p>
     `;
